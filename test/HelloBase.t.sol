@@ -61,4 +61,9 @@ contract HelloBaseTest is Test {
         vm.expectRevert("Only owner can call this function");
         helloBase.transferOwnership(address(0x456));
     }
+    
+    function test_IsOnBase_Sepolia() public {
+        vm.mockChainId(84532);
+        assertTrue(helloBase.isOnBase());
+    }
 }
