@@ -7,13 +7,17 @@ contract HelloBase {
     
     event MessageUpdated(string newMessage, address indexed updatedBy, uint256 timestamp);
     
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this function");
+        _;
+    }
+    
     constructor(string memory _initialMessage) {
         message = _initialMessage;
         owner = msg.sender;
     }
     
-    function updateMessage(string memory _newMessage) public {
-        require(msg.sender == owner, "Only owner can update message");
+    function updateMessage(string memory _newMessage) public onlyOwner {
         message = _newMessage;
         emit MessageUpdated(_newMessage, msg.sender, block.timestamp);
     }
