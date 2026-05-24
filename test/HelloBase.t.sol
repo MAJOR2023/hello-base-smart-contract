@@ -31,4 +31,11 @@ contract HelloBaseTest is Test {
         vm.expectRevert("Only owner can update message");
         helloBase.updateMessage("Hacked!");
     }
+    
+    function test_UpdateMessage_EmitsEvent() public {
+        string memory newMsg = "With Event!";
+        vm.expectEmit(true, true, true, true);
+        emit HelloBase.MessageUpdated(newMsg, owner, block.timestamp);
+        helloBase.updateMessage(newMsg);
+    }
 }
