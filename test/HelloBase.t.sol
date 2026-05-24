@@ -66,4 +66,9 @@ contract HelloBaseTest is Test {
         vm.mockChainId(84532);
         assertTrue(helloBase.isOnBase());
     }
+    
+    function test_IsOnBase_EthereumMainnet_ReturnsFalse() public {
+        vm.mockChainId(1);
+        assertFalse(helloBase.isOnBase());
+    }
 }
