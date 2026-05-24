@@ -55,4 +55,10 @@ contract HelloBaseTest is Test {
         helloBase.transferOwnership(user);
         assertEq(helloBase.owner(), user);
     }
+    
+    function test_TransferOwnership_NonOwner_Reverts() public {
+        vm.prank(user);
+        vm.expectRevert("Only owner can call this function");
+        helloBase.transferOwnership(address(0x456));
+    }
 }
