@@ -6,4 +6,9 @@ contract HelloBase {
     address public owner;
     
     event MessageUpdated(string newMessage, address indexed updatedBy, uint256 timestamp);
+    
+    constructor(string memory _initialMessage) {
+        message = _initialMessage;
+        owner = msg.sender;
+    }
 }
