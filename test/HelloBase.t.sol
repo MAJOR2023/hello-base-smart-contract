@@ -9,8 +9,8 @@ contract HelloBaseTest is Test {
     address public owner;
     address public user;
     
-    // Локальное объявление события для корректной работы vm.expectEmit
     event MessageUpdated(string newMessage, address indexed updatedBy, uint256 timestamp);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     
     function setUp() public {
         owner = address(this);
@@ -31,7 +31,7 @@ contract HelloBaseTest is Test {
     
     function test_UpdateMessage_NonOwner_Reverts() public {
         vm.prank(user);
-        vm.expectRevert("Only owner can update message");
+        vm.expectRevert("Only owner can call this function");
         helloBase.updateMessage("Hacked!");
     }
     
@@ -47,5 +47,12 @@ contract HelloBaseTest is Test {
         assertEq(returnedMsg, "Initial Message");
         assertEq(own, owner);
         assertEq(chainId, block.chainid);
+    }
+    
+    function test_TransferOwnership_Success() public {
+        vm.expectEmit(true, true, false, false);
+        emit OwnershipTransferred(owner, user);
+        helloBase.transferOwnership(user);
+        assertEq(helloBase.owner(), user);
     }
 }
