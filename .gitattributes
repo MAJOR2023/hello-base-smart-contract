@@ -1,0 +1,15 @@
+# Auto-detect text files
+* text=auto
+
+# Force LF for source files
+*.sol text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.svg binary
