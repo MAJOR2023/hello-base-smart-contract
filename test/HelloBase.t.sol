@@ -19,4 +19,10 @@ contract HelloBaseTest is Test {
         assertEq(helloBase.message(), "Initial Message");
         assertEq(helloBase.owner(), owner);
     }
+    
+    function test_UpdateMessage_ByOwner() public {
+        string memory newMsg = "Updated on Base!";
+        helloBase.updateMessage(newMsg);
+        assertEq(helloBase.message(), newMsg);
+    }
 }
