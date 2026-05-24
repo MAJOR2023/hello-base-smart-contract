@@ -13,5 +13,8 @@ contract DeployScript is Script {
         HelloBase helloBase = new HelloBase("Hello from Base! 🚀");
         
         vm.stopBroadcast();
+        
+        console.log("Contract deployed at:", address(helloBase));
+        console.log("Network chainId:", block.chainid);
     }
 }
