@@ -38,4 +38,11 @@ contract HelloBaseTest is Test {
         emit HelloBase.MessageUpdated(newMsg, owner, block.timestamp);
         helloBase.updateMessage(newMsg);
     }
+    
+    function test_GetContractInfo() public view {
+        (string memory msg, address own, uint256 chainId) = helloBase.getContractInfo();
+        assertEq(msg, "Initial Message");
+        assertEq(own, owner);
+        assertEq(chainId, block.chainid);
+    }
 }
