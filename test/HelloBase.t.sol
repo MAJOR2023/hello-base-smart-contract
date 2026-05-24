@@ -14,4 +14,9 @@ contract HelloBaseTest is Test {
         user = address(0x123);
         helloBase = new HelloBase("Initial Message");
     }
+    
+    function test_InitialState() public view {
+        assertEq(helloBase.message(), "Initial Message");
+        assertEq(helloBase.owner(), owner);
+    }
 }
