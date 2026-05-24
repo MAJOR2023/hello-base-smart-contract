@@ -9,6 +9,9 @@ contract HelloBaseTest is Test {
     address public owner;
     address public user;
     
+    // Локальное объявление события для корректной работы vm.expectEmit
+    event MessageUpdated(string newMessage, address indexed updatedBy, uint256 timestamp);
+    
     function setUp() public {
         owner = address(this);
         user = address(0x123);
@@ -35,13 +38,13 @@ contract HelloBaseTest is Test {
     function test_UpdateMessage_EmitsEvent() public {
         string memory newMsg = "With Event!";
         vm.expectEmit(true, true, true, true);
-        emit HelloBase.MessageUpdated(newMsg, owner, block.timestamp);
+        emit MessageUpdated(newMsg, owner, block.timestamp);
         helloBase.updateMessage(newMsg);
     }
     
     function test_GetContractInfo() public view {
-        (string memory msg, address own, uint256 chainId) = helloBase.getContractInfo();
-        assertEq(msg, "Initial Message");
+        (string memory returnedMsg, address own, uint256 chainId) = helloBase.getContractInfo();
+        assertEq(returnedMsg, "Initial Message");
         assertEq(own, owner);
         assertEq(chainId, block.chainid);
     }

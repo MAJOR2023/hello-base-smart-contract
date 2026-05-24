@@ -19,7 +19,7 @@ contract HelloBase {
     }
     
     function getContractInfo() public view returns (
-        string memory msg,
+        string memory returnedMsg,
         address own,
         uint256 chainId
     ) {
