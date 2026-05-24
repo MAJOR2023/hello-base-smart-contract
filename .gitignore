@@ -1,0 +1,12 @@
+# Foundry
+cache/
+out/
+lib/
+
+# Environment
+.env
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
