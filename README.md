@@ -7,7 +7,8 @@ My first smart contract on Base network.
 - ✅ Secure ownership transfer (transferOwnership)
 - ✅ Event emission on updates & ownership changes
 - ✅ Chain ID verification (isOnBase)
-- ✅ Full Foundry test suite (7 tests passing)
+- ✅ Full Foundry test suite (9 tests passing)
 - ⛽ Gas-optimized with reporting enabled
+- 🧪 Mocked chainid tests for Base networks
 
 _Work in progress..._
