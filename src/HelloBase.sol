@@ -6,6 +6,7 @@ contract HelloBase {
     address public owner;
     
     event MessageUpdated(string newMessage, address indexed updatedBy, uint256 timestamp);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
@@ -20,6 +21,12 @@ contract HelloBase {
     function updateMessage(string memory _newMessage) public onlyOwner {
         message = _newMessage;
         emit MessageUpdated(_newMessage, msg.sender, block.timestamp);
+    }
+    
+    function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "New owner cannot be zero address");
+        emit OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
     }
     
     function getContractInfo() public view returns (
