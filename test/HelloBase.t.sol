@@ -25,4 +25,10 @@ contract HelloBaseTest is Test {
         helloBase.updateMessage(newMsg);
         assertEq(helloBase.message(), newMsg);
     }
+    
+    function test_UpdateMessage_NonOwner_Reverts() public {
+        vm.prank(user);
+        vm.expectRevert("Only owner can update message");
+        helloBase.updateMessage("Hacked!");
+    }
 }
